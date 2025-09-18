@@ -1,0 +1,69 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+IMPORTABLE EXTERNPROTO "../protos/rbwatcher.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/balls/protos/Ball.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/solids/protos/SolidBox.proto"
+
+WorldInfo {
+  title "Robotnik Test World"
+  basicTimeStep 20 # ms
+  FPS 30
+}
+Viewpoint {
+  orientation -0.1454525098168424 -0.08250904869804526 0.9859187716393907 3.9103647187611212
+  position 9.01459304833963 5.688632731976561 3.888974169615678
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.64
+  floorSize 15 15
+  floorTileSize 1 1
+  wallHeight 1
+}
+Ball {
+  translation 0.33942999999989254 -2.7200000007065985 -0.14000000000001564
+  rotation -0.0016588608842046631 0.9999986240893368 1.4351811997595521e-08 2.4338652831001316e-06
+  radius 0.5
+  mass 1e-11
+}
+Wall {
+  translation -3.75 0 -0.64
+  size 0.1 5 2.4
+}
+Wall {
+  translation 3.75 0 -0.64
+  name "wall(1)"
+  size 0.1 5 2.4
+}
+Wall {
+  translation 0 -3.75 -0.64
+  rotation 0 0 1 1.5707996938995747
+  name "wall(2)"
+  size 0.1 5 2.4
+}
+Wall {
+  translation 0 3.75 -0.64
+  rotation 0 0 1 1.5707996938995747
+  name "wall(3)"
+  size 0.1 5 2.4
+}
+SolidBox {
+  translation -3.18 0 -0.25
+  size 0.7 0.7 0.7
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "../resource/5x5_1000-14.jpg"
+      ]
+    }
+    roughness 0.5
+    metalness 0
+  }
+}
