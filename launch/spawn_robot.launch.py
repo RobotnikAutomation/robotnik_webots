@@ -15,6 +15,7 @@ from launch.actions import (DeclareLaunchArgument, EmitEvent, ExecuteProcess,
 from robotnik_common.launch import ExtendedArgument, AddArgumentParser
 from launch.substitutions import TextSubstitution, PathJoinSubstitution, Command, PythonExpression
 from webots_ros2_driver.utils import controller_protocol, controller_ip_address
+from launch.conditions import IfCondition
 
 
 def load_urdf(file_path):
@@ -87,8 +88,16 @@ def generate_launch_description():
     )
     add_to_launcher.add_arg(arg)
     z_pos = LaunchConfiguration('z')
+    
+    arg = ExtendedArgument(
+        name='run_rviz',
+        description='Launch RViz2',
+        default_value='false'
+    )
+    add_to_launcher.add_arg(arg)
+    run_rviz = LaunchConfiguration('run_rviz')
+
     params = add_to_launcher.process_arg()
- 
         
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -261,13 +270,15 @@ def generate_launch_description():
     
     rviz2_config = [get_package_share_directory('robotnik_webots'),'/resource/', robot,'/rviz_config.rviz']
     
+   
     rviz2 = Node(
         package="rviz2",
         executable="rviz2",
         namespace=params['robot_id'],
-        arguments=['-d', rviz2_config]
-
+        arguments=['-d', rviz2_config],
+        condition=IfCondition(run_rviz)
     )
+
     ld.add_action(rviz2)
 
     return ld
