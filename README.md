@@ -16,11 +16,66 @@ To build this package with ROS 2 and colcon:
 colcon build --packages-select robotnik_webots
 ```
 
-To launch a robot in Webots:
+
+## Launch files and arguments
+
+### 1. Launch the Webots world
 
 ```bash
 ros2 launch robotnik_webots spawn_world.launch.py
+```
+or with the new launch file:
+```bash
+ros2 launch robotnik_webots new_spawn_world.launch.py
+```
+
+#### Arguments for `spawn_world.launch.py` and `new_spawn_world.launch.py`
+
+- `world`: Name of the world file (without extension). Default: `default_world`
+- `world_path`: Full path to the world file. Default: `<package_share>/worlds/<world>.wbt`
+- `gui`: Launch Webots with GUI (`true`/`false`). Default: `true`
+
+**Examples:**
+
+Launch a specific world:
+```bash
+ros2 launch robotnik_webots new_spawn_world.launch.py world:=my_custom_world
+```
+
+Launch headless (no GUI):
+```bash
+ros2 launch robotnik_webots new_spawn_world.launch.py gui:=false
+```
+
+### 2. Spawn a robot in Webots
+
+```bash
 ros2 launch robotnik_webots spawn_robot.launch.py
+```
+
+#### Arguments for `spawn_robot.launch.py`
+
+- `robot_id`: Robot personal name. Default: `robot`
+- `robot`: Robot model (e.g., `rbwatcher`, `rbvogui`, `rbkairos`, `rbtheron`, `rbsummit`). Default: `rbwatcher`
+- `robot_model`: Robot type variation. Default: value of `robot`
+- `x`, `y`, `z`: Initial position in the world. Default: `0.0`
+- `run_rviz`: Launch RViz2 (`true`/`false`). Default: `false`
+
+**Examples:**
+
+Spawn a robot at a specific position:
+```bash
+ros2 launch robotnik_webots spawn_robot.launch.py x:=2.0 y:=1.0 z:=0.0
+```
+
+Spawn a robot with a custom name and model:
+```bash
+ros2 launch robotnik_webots spawn_robot.launch.py robot_id:=robot_a robot:=rbkairos
+```
+
+Spawn a robot and launch RViz2:
+```bash
+ros2 launch robotnik_webots spawn_robot.launch.py run_rviz:=true
 ```
 
 ## Requirements
