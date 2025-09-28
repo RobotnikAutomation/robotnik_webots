@@ -1,0 +1,27 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+IMPORTABLE EXTERNPROTO "../protos/rbwatcher.proto"
+
+WorldInfo {
+  title "Robotnik Empty World"
+  basicTimeStep 20 # ms
+  FPS 30
+}
+Viewpoint {
+  orientation -0.1454525098168424 -0.08250904869804526 0.9859187716393907 3.9103647187611212
+  position 9.01459304833963 5.688632731976561 3.888974169615678
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.64
+  floorSize 50 50
+  floorTileSize 1 1
+  wallHeight 1
+}
+
