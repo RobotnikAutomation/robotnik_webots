@@ -417,7 +417,7 @@ PROTO rbwatcher [
                     translation 0.000000 0.000000 0.063500
                     children [
                         Lidar {
-                          name "top_3d_laser"
+                          name IS robot_top_3d_laser_link
                           fieldOfView 6.283185
                           verticalFieldOfView 0.5236
                           horizontalResolution 1800
@@ -430,9 +430,9 @@ PROTO rbwatcher [
                           minFrequency 1
                           maxFrequency 20
                           defaultFrequency 10
+                          type "rotating"
                         }
                     ]
-                    name IS robot_top_3d_laser_link
                   }
               ]
               name IS robot_top_3d_laser_base_link            

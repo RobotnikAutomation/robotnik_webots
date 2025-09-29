@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /top_3d_laser1
       Splitter Ratio: 0.5
     Tree Height: 470
   - Class: rviz_common/Selection
@@ -102,7 +103,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot/robot/top_3d_laser/point_cloud
+        Value: /robot/robot/robot_top_3d_laser_link/point_cloud
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -197,7 +198,7 @@ Visualization Manager:
           Value: true
         robot_top_structure_link:
           Value: true
-        top_3d_laser:
+        solid:
           Value: true
         top_ptz_camera:
           Value: true
@@ -249,8 +250,8 @@ Visualization Manager:
                   robot_imu_inertial:
                     {}
               robot_top_3d_laser_base_link:
-                robot_top_3d_laser_link:
-                  top_3d_laser:
+                solid:
+                  robot_top_3d_laser_link:
                     {}
               robot_top_ptz_camera_base_link:
                 robot_top_ptz_camera_pan_link:
