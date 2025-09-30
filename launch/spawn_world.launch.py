@@ -65,7 +65,7 @@ def generate_webots_launch_description(context, params):
 
 def generate_launch_description():
     raw_args = [
-        ("world", "World Name", "default_world", ""),
+        ("world", "World Name", "demo", ""),
         ("world_path", "Path to World File", [FindPackageShare('robotnik_webots'), '/worlds/', LaunchConfiguration('world'), '.wbt'], ""),
         ("gui", "Launch GUI", "true", ""),
     ]
