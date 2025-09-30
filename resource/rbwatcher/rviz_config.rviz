@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /top_3d_laser1
+        - /front_camera1
       Splitter Ratio: 0.5
     Tree Height: 470
   - Class: rviz_common/Selection
@@ -103,7 +104,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot/robot/robot_top_3d_laser_link/point_cloud
+        Value: /rbwatcher1/rbwatcher1/rbwatcher1_top_3d_laser_link/point_cloud
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -119,7 +120,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot/robot/front_rgbd_camera_color/image_color
+        Value: /rbwatcher1/rbwatcher1/front_rgbd_camera_color/image_color
       Value: true
     - Class: rviz_default_plugins/TF
       Enabled: true
@@ -140,33 +141,109 @@ Visualization Manager:
           Value: true
         gps:
           Value: true
-        robot_back_left_wheel_link:
+        rbwatcher1_back_left_wheel_link:
           Value: true
-        robot_back_right_wheel_link:
+        rbwatcher1_back_right_wheel_link:
           Value: true
-        robot_base_footprint:
+        rbwatcher1_base_footprint:
+          Value: true
+        rbwatcher1_base_link:
+          Value: true
+        rbwatcher1_front_left_wheel_link:
+          Value: true
+        rbwatcher1_front_rgbd_camera_color_frame:
+          Value: true
+        rbwatcher1_front_rgbd_camera_depth_frame:
+          Value: true
+        rbwatcher1_front_rgbd_camera_infra2_frame:
+          Value: true
+        rbwatcher1_front_rgbd_camera_link:
+          Value: true
+        rbwatcher1_front_right_wheel_link:
+          Value: true
+        rbwatcher1_gps_base_link:
+          Value: true
+        rbwatcher1_gps_link:
+          Value: true
+        rbwatcher1_imu_base_link:
+          Value: true
+        rbwatcher1_imu_link:
+          Value: true
+        rbwatcher1_odom:
+          Value: true
+        rbwatcher1_top_3d_laser_base_link:
+          Value: true
+        rbwatcher1_top_3d_laser_link:
+          Value: true
+        rbwatcher1_top_ptz_camera_base_link:
+          Value: true
+        rbwatcher1_top_ptz_camera_frame_link:
+          Value: true
+        rbwatcher1_top_ptz_camera_optical_frame_link:
+          Value: true
+        rbwatcher1_top_ptz_camera_optical_thermal_frame_link:
+          Value: true
+        rbwatcher1_top_ptz_camera_pan_link:
+          Value: true
+        rbwatcher1_top_ptz_camera_thermal_frame_link:
+          Value: true
+        rbwatcher1_top_ptz_camera_tilt_link:
+          Value: true
+        rbwatcher1_top_structure_link:
+          Value: true
+        rbwatcher2_back_left_wheel_link:
+          Value: true
+        rbwatcher2_back_right_wheel_link:
+          Value: true
+        rbwatcher2_base_footprint:
+          Value: true
+        rbwatcher2_base_link:
+          Value: true
+        rbwatcher2_front_left_wheel_link:
+          Value: true
+        rbwatcher2_front_rgbd_camera_color_frame:
+          Value: true
+        rbwatcher2_front_rgbd_camera_depth_frame:
+          Value: true
+        rbwatcher2_front_rgbd_camera_infra2_frame:
+          Value: true
+        rbwatcher2_front_rgbd_camera_link:
+          Value: true
+        rbwatcher2_front_right_wheel_link:
+          Value: true
+        rbwatcher2_gps_base_link:
+          Value: true
+        rbwatcher2_gps_link:
+          Value: true
+        rbwatcher2_imu_base_link:
+          Value: true
+        rbwatcher2_imu_link:
+          Value: true
+        rbwatcher2_odom:
+          Value: true
+        rbwatcher2_top_3d_laser_base_link:
+          Value: true
+        rbwatcher2_top_3d_laser_link:
+          Value: true
+        rbwatcher2_top_ptz_camera_base_link:
+          Value: true
+        rbwatcher2_top_ptz_camera_frame_link:
+          Value: true
+        rbwatcher2_top_ptz_camera_optical_frame_link:
+          Value: true
+        rbwatcher2_top_ptz_camera_optical_thermal_frame_link:
+          Value: true
+        rbwatcher2_top_ptz_camera_pan_link:
+          Value: true
+        rbwatcher2_top_ptz_camera_thermal_frame_link:
+          Value: true
+        rbwatcher2_top_ptz_camera_tilt_link:
+          Value: true
+        rbwatcher2_top_structure_link:
           Value: true
         robot_base_link:
           Value: true
-        robot_front_left_wheel_link:
-          Value: true
-        robot_front_rgbd_camera_color_frame:
-          Value: true
-        robot_front_rgbd_camera_depth_frame:
-          Value: true
-        robot_front_rgbd_camera_infra2_frame:
-          Value: true
-        robot_front_rgbd_camera_link:
-          Value: true
-        robot_front_right_wheel_link:
-          Value: true
-        robot_gps_base_link:
-          Value: true
-        robot_gps_link:
-          Value: true
         robot_imu_accelerometer:
-          Value: true
-        robot_imu_base_link:
           Value: true
         robot_imu_compass:
           Value: true
@@ -174,29 +251,7 @@ Visualization Manager:
           Value: true
         robot_imu_inertial:
           Value: true
-        robot_imu_link:
-          Value: true
         robot_odom:
-          Value: true
-        robot_top_3d_laser_base_link:
-          Value: true
-        robot_top_3d_laser_link:
-          Value: true
-        robot_top_ptz_camera_base_link:
-          Value: true
-        robot_top_ptz_camera_frame_link:
-          Value: true
-        robot_top_ptz_camera_optical_frame_link:
-          Value: true
-        robot_top_ptz_camera_optical_thermal_frame_link:
-          Value: true
-        robot_top_ptz_camera_pan_link:
-          Value: true
-        robot_top_ptz_camera_thermal_frame_link:
-          Value: true
-        robot_top_ptz_camera_tilt_link:
-          Value: true
-        robot_top_structure_link:
           Value: true
         solid:
           Value: true
@@ -210,68 +265,109 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        world:
-          robot_odom:
-            robot_base_link:
-              robot_back_left_wheel_link:
+        base_link:
+          rbwatcher1_base_link:
+            rbwatcher1_back_left_wheel_link:
+              {}
+            rbwatcher1_back_right_wheel_link:
+              {}
+            rbwatcher1_base_footprint:
+              {}
+            rbwatcher1_front_left_wheel_link:
+              {}
+            rbwatcher1_front_rgbd_camera_link:
+              rbwatcher1_front_rgbd_camera_color_frame:
                 {}
-              robot_back_right_wheel_link:
+              rbwatcher1_front_rgbd_camera_depth_frame:
                 {}
-              robot_base_footprint:
+              rbwatcher1_front_rgbd_camera_infra2_frame:
                 {}
-              robot_front_left_wheel_link:
+            rbwatcher1_front_right_wheel_link:
+              {}
+            rbwatcher1_gps_base_link:
+              rbwatcher1_gps_link:
                 {}
-              robot_front_rgbd_camera_link:
-                robot_front_rgbd_camera_color_frame:
-                  front_rgbd_camera_color:
-                    {}
-                robot_front_rgbd_camera_depth_frame:
-                  front_rgbd_camera_depth:
-                    {}
-                robot_front_rgbd_camera_infra2_frame:
-                  front_rgbd_camera_irred1:
-                    {}
-                  front_rgbd_camera_irred2:
-                    {}
-              robot_front_right_wheel_link:
+            rbwatcher1_imu_base_link:
+              rbwatcher1_imu_link:
                 {}
-              robot_gps_base_link:
-                robot_gps_link:
-                  gps:
-                    {}
-              robot_imu_base_link:
-                robot_imu_link:
-                  robot_imu_accelerometer:
-                    {}
-                  robot_imu_compass:
-                    {}
-                  robot_imu_gyro:
-                    {}
-                  robot_imu_inertial:
-                    {}
-              robot_top_3d_laser_base_link:
-                solid:
-                  robot_top_3d_laser_link:
-                    {}
-              robot_top_ptz_camera_base_link:
-                robot_top_ptz_camera_pan_link:
-                  robot_top_ptz_camera_tilt_link:
-                    robot_top_ptz_camera_frame_link:
-                      robot_top_ptz_camera_optical_frame_link:
-                        {}
-                      top_ptz_camera:
-                        {}
-                    robot_top_ptz_camera_thermal_frame_link:
-                      robot_top_ptz_camera_optical_thermal_frame_link:
-                        {}
-              robot_top_structure_link:
-                {}
+            rbwatcher1_top_3d_laser_base_link:
+              {}
+            rbwatcher1_top_ptz_camera_base_link:
+              rbwatcher1_top_ptz_camera_pan_link:
+                rbwatcher1_top_ptz_camera_tilt_link:
+                  rbwatcher1_top_ptz_camera_frame_link:
+                    rbwatcher1_top_ptz_camera_optical_frame_link:
+                      {}
+                  rbwatcher1_top_ptz_camera_thermal_frame_link:
+                    rbwatcher1_top_ptz_camera_optical_thermal_frame_link:
+                      {}
+            rbwatcher1_top_structure_link:
+              {}
+          rbwatcher2_base_link:
+            rbwatcher2_back_left_wheel_link:
+              {}
+            rbwatcher2_back_right_wheel_link:
+              {}
+            rbwatcher2_base_footprint:
+              {}
+            rbwatcher2_front_left_wheel_link:
+              {}
+            rbwatcher2_front_rgbd_camera_link:
+              rbwatcher2_front_rgbd_camera_color_frame:
+                front_rgbd_camera_color:
+                  {}
+              rbwatcher2_front_rgbd_camera_depth_frame:
+                front_rgbd_camera_depth:
+                  {}
+              rbwatcher2_front_rgbd_camera_infra2_frame:
+                front_rgbd_camera_irred1:
+                  {}
+                front_rgbd_camera_irred2:
+                  {}
+            rbwatcher2_front_right_wheel_link:
+              {}
+            rbwatcher2_gps_base_link:
+              rbwatcher2_gps_link:
+                gps:
+                  {}
+            rbwatcher2_imu_base_link:
+              rbwatcher2_imu_link:
+                robot_imu_accelerometer:
+                  {}
+                robot_imu_compass:
+                  {}
+                robot_imu_gyro:
+                  {}
+                robot_imu_inertial:
+                  {}
+            rbwatcher2_top_3d_laser_base_link:
+              solid:
+                rbwatcher1_top_3d_laser_link:
+                  {}
+                rbwatcher2_top_3d_laser_link:
+                  {}
+            rbwatcher2_top_ptz_camera_base_link:
+              rbwatcher2_top_ptz_camera_pan_link:
+                rbwatcher2_top_ptz_camera_tilt_link:
+                  rbwatcher2_top_ptz_camera_frame_link:
+                    rbwatcher2_top_ptz_camera_optical_frame_link:
+                      {}
+                    top_ptz_camera:
+                      {}
+                  rbwatcher2_top_ptz_camera_thermal_frame_link:
+                    rbwatcher2_top_ptz_camera_optical_thermal_frame_link:
+                      {}
+            rbwatcher2_top_structure_link:
+              {}
+        robot_odom:
+          robot_base_link:
+            {}
       Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: robot_odom
+    Fixed Frame: rbwatcher1_base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -329,10 +425,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.33539849519729614
+      Pitch: 0.6403983235359192
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.355431079864502
+      Yaw: 6.125436782836914
     Saved: ~
 Window Geometry:
   Displays:
