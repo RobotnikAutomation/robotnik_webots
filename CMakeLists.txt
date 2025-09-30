@@ -13,7 +13,7 @@ endif()
 
 # Install launch files
 install(
-  DIRECTORY protos resource launch worlds
+  DIRECTORY protos resource launch worlds config scripts
   DESTINATION share/${PROJECT_NAME}/
 )
 
