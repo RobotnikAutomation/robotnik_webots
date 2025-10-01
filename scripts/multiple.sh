@@ -66,7 +66,7 @@ PY
   pids+=( "$!" )
 
   # 3-second delay before next spawn
-  if (( i < n-1 )); then sleep 1; fi
+  if (( i < n-1 )); then sleep 3; fi
 done
 
 # wait and propagate failure
