@@ -24,4 +24,10 @@ RectangleArena {
   floorTileSize 1 1
   wallHeight 1
 }
-
+ContactProperties {
+  material1 "rubber"
+  coulombFriction 1.5
+  bounce 0.0               # No bounce for wheels
+  slip 0.01                # Low slip for good adherence
+  forceDependentSlip 0.0 
+}
