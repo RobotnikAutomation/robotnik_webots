@@ -25,7 +25,8 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: top_3d_laser1
+    # Set SyncSource to your sensor topic (e.g., /scan, /my_robot/laser, etc.)
+    SyncSource: <SYNC_SOURCE_TOPIC>
 Visualization Manager:
   Class: ""
   Displays:
