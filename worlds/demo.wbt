@@ -67,3 +67,10 @@ SolidBox {
     metalness 0
   }
 }
+
+ContactProperties {
+  material1 "rubber"
+  coulombFriction 1.5
+  bounce 0.0               # No bounce for wheels
+  forceDependentSlip 0.0 
+}

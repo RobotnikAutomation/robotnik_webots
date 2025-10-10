@@ -97,23 +97,36 @@ PROTO rbwatcher [
                 name "robot_front_right_wheel_joint_sensor"
               }
             ]
+
             endPoint Solid {
-              translation 0.227950 -0.155000 0.000000
+              translation 0.227950 -0.226 0.000000 
+              rotation 1 0 0 1.5708
               children [
-                Shape {
-                  appearance PBRAppearance {
-                    baseColor 0.500000 0.500000 0.500000
-                    roughness 1.000000
-                    metalness 0
-                  }
-                  geometry DEF rubber_wheel_v2_right Mesh {
-                    url "../resource/rbwatcher/meshes/rubber_wheel_v2_right.stl"
-                  }
+                Pose {
+                  rotation 1 0 0 -1.5708
+                  translation 0 0 -0.071
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        roughness 1.000000
+                        metalness 0
+                      }
+                      geometry DEF rubber_wheel_v2_right Mesh {
+                        url "../resource/rbwatcher/meshes/rubber_wheel_v2_right.stl"
+                      }               
+                    }
+                  ]                     
                 }
               ]
               name IS robot_front_right_wheel_link
-              boundingObject USE rubber_wheel_v2_right
-              physics Physics {
+              boundingObject DEF rubber_wheel_v2_collision Cylinder {
+                  radius 0.11
+                  height 0.142
+                  subdivision 50
+              }
+              contactMaterial "rubber"
+              physics DEF rubber_wheel_physics Physics {
                 density -1
                 mass 4.000000
                 centerOfMass [ 0.000000 0.000000 0.000000 ]
@@ -139,31 +152,32 @@ PROTO rbwatcher [
                 name "robot_front_left_wheel_joint_sensor"
               }
             ]
+
             endPoint Solid {
-              translation 0.227950 0.155000 0.000000
+              translation 0.227950 0.226 0.000000 
+              rotation 1 0 0 1.5708
               children [
-                Shape {
-                  appearance PBRAppearance {
-                    baseColor 0.500000 0.500000 0.500000
-                    roughness 1.000000
-                    metalness 0
-                  }
-                  geometry DEF rubber_wheel_v2_left Mesh {
-                    url "../resource/rbwatcher/meshes/rubber_wheel_v2_left.stl"
-                  }
+                Pose {
+                  rotation 1 0 0 -1.5708
+                  translation 0 0 0.071
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        roughness 1.000000
+                        metalness 0
+                      }
+                      geometry DEF rubber_wheel_v2_left Mesh {
+                        url "../resource/rbwatcher/meshes/rubber_wheel_v2_left.stl"
+                      }               
+                    }
+                  ]                     
                 }
               ]
               name IS robot_front_left_wheel_link
-              boundingObject USE rubber_wheel_v2_left
-              physics Physics {
-                density -1
-                mass 4.000000
-                centerOfMass [ 0.000000 0.000000 0.000000 ]
-                inertiaMatrix [
-                  2.052758e-02 2.761250e-02 2.052758e-02
-                  0.000000e+00 0.000000e+00 0.000000e+00
-                ]
-              }
+              boundingObject USE rubber_wheel_v2_collision
+              contactMaterial "rubber"              
+              physics USE rubber_wheel_physics
             }
           }
           DEF BACK_RIGHT_WHEEL_HJ HingeJoint {
@@ -182,28 +196,28 @@ PROTO rbwatcher [
               }
             ]
             endPoint Solid {
-              translation -0.227950 -0.155000 0.000000
+              translation -0.227950 -0.226 0.000000 
+              rotation 1 0 0 1.5708
               children [
-                Shape {
-                  appearance PBRAppearance {
-                    baseColor 0.500000 0.500000 0.500000
-                    roughness 1.000000
-                    metalness 0
-                  }
-                  geometry USE rubber_wheel_v2_right
+                Pose {
+                  rotation 1 0 0 -1.5708
+                  translation 0 0 -0.071
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        roughness 1.000000
+                        metalness 0
+                      }
+                      geometry USE rubber_wheel_v2_right               
+                    }
+                  ]                     
                 }
               ]
               name IS robot_back_right_wheel_link
-              boundingObject USE rubber_wheel_v2_right
-              physics Physics {
-                density -1
-                mass 4.000000
-                centerOfMass [ 0.000000 0.000000 0.000000 ]
-                inertiaMatrix [
-                  2.052758e-02 2.761250e-02 2.052758e-02
-                  0.000000e+00 0.000000e+00 0.000000e+00
-                ]
-              }
+              boundingObject USE rubber_wheel_v2_collision
+              contactMaterial "rubber"
+              physics USE rubber_wheel_physics
             }
           }
           DEF BACK_LEFT_WHEEL_HJ HingeJoint {
@@ -222,28 +236,28 @@ PROTO rbwatcher [
               }
             ]
             endPoint Solid {
-              translation -0.227950 0.155000 0.000000
+              translation -0.227950 0.226 0.000000 
+              rotation 1 0 0 1.5708
               children [
-                Shape {
-                  appearance PBRAppearance {
-                    baseColor 0.500000 0.500000 0.500000
-                    roughness 1.000000
-                    metalness 0
-                  }
-                  geometry USE rubber_wheel_v2_left
+                Pose {
+                  rotation 1 0 0 -1.5708
+                  translation 0 0 0.071
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        roughness 1.000000
+                        metalness 0
+                      }
+                      geometry USE rubber_wheel_v2_left               
+                    }
+                  ]                     
                 }
               ]
               name IS robot_back_left_wheel_link
-              boundingObject USE rubber_wheel_v2_left
-              physics Physics {
-                density -1
-                mass 4.000000
-                centerOfMass [ 0.000000 0.000000 0.000000 ]
-                inertiaMatrix [
-                  2.052758e-02 2.761250e-02 2.052758e-02
-                  0.000000e+00 0.000000e+00 0.000000e+00
-                ]
-              }
+              boundingObject USE rubber_wheel_v2_collision
+              contactMaterial "rubber"
+              physics USE rubber_wheel_physics
             }
           }
           DEF TOP_STRUCTURE Solid {
@@ -417,7 +431,7 @@ PROTO rbwatcher [
                     translation 0.000000 0.000000 0.063500
                     children [
                         Lidar {
-                          name "top_3d_laser"
+                          name IS robot_top_3d_laser_link
                           fieldOfView 6.283185
                           verticalFieldOfView 0.5236
                           horizontalResolution 1800
@@ -430,9 +444,9 @@ PROTO rbwatcher [
                           minFrequency 1
                           maxFrequency 20
                           defaultFrequency 10
+                          type "rotating"
                         }
                     ]
-                    name IS robot_top_3d_laser_link
                   }
               ]
               name IS robot_top_3d_laser_base_link            
