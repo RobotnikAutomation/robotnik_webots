@@ -6,10 +6,8 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /top_3d_laser1
-        - /front_camera1
-      Splitter Ratio: 0.5
-    Tree Height: 470
+      Splitter Ratio: 0.29712459444999695
+    Tree Height: 315
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -27,7 +25,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: top_3d_laser
+    SyncSource: top_3d_laser1
 Visualization Manager:
   Class: ""
   Displays:
@@ -75,53 +73,6 @@ Visualization Manager:
       Update Interval: 0
       Value: false
       Visual Enabled: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz_default_plugins/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 0
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: top_3d_laser
-      Position Transformer: XYZ
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /rbwatcher1/rbwatcher1/rbwatcher1_top_3d_laser_link/point_cloud
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Class: rviz_default_plugins/Image
-      Enabled: true
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: front_camera
-      Normalize Range: true
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /rbwatcher1/rbwatcher1/front_rgbd_camera_color/image_color
-      Value: true
     - Class: rviz_default_plugins/TF
       Enabled: true
       Filter (blacklist): ""
@@ -191,56 +142,6 @@ Visualization Manager:
           Value: true
         rbwatcher1_top_structure_link:
           Value: true
-        rbwatcher2_back_left_wheel_link:
-          Value: true
-        rbwatcher2_back_right_wheel_link:
-          Value: true
-        rbwatcher2_base_footprint:
-          Value: true
-        rbwatcher2_base_link:
-          Value: true
-        rbwatcher2_front_left_wheel_link:
-          Value: true
-        rbwatcher2_front_rgbd_camera_color_frame:
-          Value: true
-        rbwatcher2_front_rgbd_camera_depth_frame:
-          Value: true
-        rbwatcher2_front_rgbd_camera_infra2_frame:
-          Value: true
-        rbwatcher2_front_rgbd_camera_link:
-          Value: true
-        rbwatcher2_front_right_wheel_link:
-          Value: true
-        rbwatcher2_gps_base_link:
-          Value: true
-        rbwatcher2_gps_link:
-          Value: true
-        rbwatcher2_imu_base_link:
-          Value: true
-        rbwatcher2_imu_link:
-          Value: true
-        rbwatcher2_odom:
-          Value: true
-        rbwatcher2_top_3d_laser_base_link:
-          Value: true
-        rbwatcher2_top_3d_laser_link:
-          Value: true
-        rbwatcher2_top_ptz_camera_base_link:
-          Value: true
-        rbwatcher2_top_ptz_camera_frame_link:
-          Value: true
-        rbwatcher2_top_ptz_camera_optical_frame_link:
-          Value: true
-        rbwatcher2_top_ptz_camera_optical_thermal_frame_link:
-          Value: true
-        rbwatcher2_top_ptz_camera_pan_link:
-          Value: true
-        rbwatcher2_top_ptz_camera_thermal_frame_link:
-          Value: true
-        rbwatcher2_top_ptz_camera_tilt_link:
-          Value: true
-        rbwatcher2_top_structure_link:
-          Value: true
         robot_base_link:
           Value: true
         robot_imu_accelerometer:
@@ -266,103 +167,245 @@ Visualization Manager:
       Show Names: false
       Tree:
         base_link:
-          rbwatcher1_base_link:
-            rbwatcher1_back_left_wheel_link:
-              {}
-            rbwatcher1_back_right_wheel_link:
-              {}
-            rbwatcher1_base_footprint:
-              {}
-            rbwatcher1_front_left_wheel_link:
-              {}
-            rbwatcher1_front_rgbd_camera_link:
-              rbwatcher1_front_rgbd_camera_color_frame:
+          {}
+        rbwatcher1_base_link:
+          rbwatcher1_back_left_wheel_link:
+            {}
+          rbwatcher1_back_right_wheel_link:
+            {}
+          rbwatcher1_base_footprint:
+            {}
+          rbwatcher1_front_left_wheel_link:
+            {}
+          rbwatcher1_front_rgbd_camera_link:
+            rbwatcher1_front_rgbd_camera_color_frame:
+              front_rgbd_camera_color:
                 {}
-              rbwatcher1_front_rgbd_camera_depth_frame:
+            rbwatcher1_front_rgbd_camera_depth_frame:
+              front_rgbd_camera_depth:
                 {}
-              rbwatcher1_front_rgbd_camera_infra2_frame:
+            rbwatcher1_front_rgbd_camera_infra2_frame:
+              front_rgbd_camera_irred1:
                 {}
-            rbwatcher1_front_right_wheel_link:
-              {}
-            rbwatcher1_gps_base_link:
-              rbwatcher1_gps_link:
+              front_rgbd_camera_irred2:
                 {}
-            rbwatcher1_imu_base_link:
-              rbwatcher1_imu_link:
+          rbwatcher1_front_right_wheel_link:
+            {}
+          rbwatcher1_gps_base_link:
+            rbwatcher1_gps_link:
+              gps:
                 {}
-            rbwatcher1_top_3d_laser_base_link:
-              {}
-            rbwatcher1_top_ptz_camera_base_link:
-              rbwatcher1_top_ptz_camera_pan_link:
-                rbwatcher1_top_ptz_camera_tilt_link:
-                  rbwatcher1_top_ptz_camera_frame_link:
-                    rbwatcher1_top_ptz_camera_optical_frame_link:
-                      {}
-                  rbwatcher1_top_ptz_camera_thermal_frame_link:
-                    rbwatcher1_top_ptz_camera_optical_thermal_frame_link:
-                      {}
-            rbwatcher1_top_structure_link:
-              {}
-          rbwatcher2_base_link:
-            rbwatcher2_back_left_wheel_link:
-              {}
-            rbwatcher2_back_right_wheel_link:
-              {}
-            rbwatcher2_base_footprint:
-              {}
-            rbwatcher2_front_left_wheel_link:
-              {}
-            rbwatcher2_front_rgbd_camera_link:
-              rbwatcher2_front_rgbd_camera_color_frame:
-                front_rgbd_camera_color:
-                  {}
-              rbwatcher2_front_rgbd_camera_depth_frame:
-                front_rgbd_camera_depth:
-                  {}
-              rbwatcher2_front_rgbd_camera_infra2_frame:
-                front_rgbd_camera_irred1:
-                  {}
-                front_rgbd_camera_irred2:
-                  {}
-            rbwatcher2_front_right_wheel_link:
-              {}
-            rbwatcher2_gps_base_link:
-              rbwatcher2_gps_link:
-                gps:
-                  {}
-            rbwatcher2_imu_base_link:
-              rbwatcher2_imu_link:
-                robot_imu_accelerometer:
-                  {}
-                robot_imu_compass:
-                  {}
-                robot_imu_gyro:
-                  {}
-                robot_imu_inertial:
-                  {}
-            rbwatcher2_top_3d_laser_base_link:
-              solid:
-                rbwatcher1_top_3d_laser_link:
-                  {}
-                rbwatcher2_top_3d_laser_link:
-                  {}
-            rbwatcher2_top_ptz_camera_base_link:
-              rbwatcher2_top_ptz_camera_pan_link:
-                rbwatcher2_top_ptz_camera_tilt_link:
-                  rbwatcher2_top_ptz_camera_frame_link:
-                    rbwatcher2_top_ptz_camera_optical_frame_link:
-                      {}
-                    top_ptz_camera:
-                      {}
-                  rbwatcher2_top_ptz_camera_thermal_frame_link:
-                    rbwatcher2_top_ptz_camera_optical_thermal_frame_link:
-                      {}
-            rbwatcher2_top_structure_link:
-              {}
-        robot_odom:
-          robot_base_link:
+          rbwatcher1_imu_base_link:
+            rbwatcher1_imu_link:
+              robot_imu_accelerometer:
+                {}
+              robot_imu_compass:
+                {}
+              robot_imu_gyro:
+                {}
+              robot_imu_inertial:
+                {}
+          rbwatcher1_top_3d_laser_base_link:
+            solid:
+              rbwatcher1_top_3d_laser_link:
+                {}
+          rbwatcher1_top_ptz_camera_base_link:
+            rbwatcher1_top_ptz_camera_pan_link:
+              rbwatcher1_top_ptz_camera_tilt_link:
+                rbwatcher1_top_ptz_camera_frame_link:
+                  rbwatcher1_top_ptz_camera_optical_frame_link:
+                    {}
+                  top_ptz_camera:
+                    {}
+                rbwatcher1_top_ptz_camera_thermal_frame_link:
+                  rbwatcher1_top_ptz_camera_optical_thermal_frame_link:
+                    {}
+          rbwatcher1_top_structure_link:
             {}
       Update Interval: 0
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: top_3d_laser1
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher1/rbwatcher1/rbwatcher1_top_3d_laser_link/point_cloud
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: top_3d_laser2
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher2/rbwatcher2/rbwatcher2_top_3d_laser_link/point_cloud
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: top_3d_laser3
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher3/rbwatcher3/rbwatcher3_top_3d_laser_link/point_cloud
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true      
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: front_camera1
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher1/rbwatcher1/front_rgbd_camera_color/image_color
+      Value: true    
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: front_camera2
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher2/rbwatcher2/front_rgbd_camera_color/image_color
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: front_camera3
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher3/rbwatcher3/front_rgbd_camera_color/image_color
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: top_camera1
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher1/rbwatcher1/top_ptz_camera/image_color
+      Value: true 
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: top_camera2
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher2/rbwatcher2/top_ptz_camera/image_color
+      Value: true    
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: top_camera3
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rbwatcher3/rbwatcher3/top_ptz_camera/image_color
       Value: true
   Enabled: true
   Global Options:
@@ -425,18 +468,18 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6403983235359192
+      Pitch: 0.6653982996940613
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 6.125436782836914
+      Yaw: 6.205437183380127
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
   Height: 1043
   Hide Left Dock: false
-  Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001b100000375fc020000000efb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d00000294000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d00610067006500000001f2000000860000000000000000fb0000000c00430061006d00650072006100000002eb000000c90000000000000000fb0000000c00430061006d006500720061010000029e000000f90000000000000000fb0000001800660072006f006e0074005f00630061006d00650072006101000002d7000000db0000001600fffffffb0000000a0049006d00610067006500000002fb000000970000000000000000fb0000000a0049006d00610067006501000002d0000000c70000000000000000000000010000010f00000375fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d00000375000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d00650100000000000007800000026f00fffffffb0000000800540069006d00650100000000000004500000000000000000000004b40000037500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd00000004000000000000018000000375fc020000000ffb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000001f9000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d00610067006500000001f2000000860000000000000000fb0000000c00430061006d00650072006100000002eb000000c90000000000000000fb0000000c00430061006d006500720061010000029e000000f90000000000000000fb0000001a00660072006f006e0074005f00630061006d0065007200610031010000023c000000a80000001600fffffffb0000000a0049006d00610067006500000002fb000000970000000000000000fb0000000a0049006d00610067006501000002d0000000c70000000000000000fb000000160074006f0070005f00630061006d006500720061003101000002ea000000c80000001600ffffff000000010000010f00000375fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d00000375000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d00650100000000000007800000026f00fffffffb0000000800540069006d00650100000000000004500000000000000000000005fa0000037500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -444,9 +487,19 @@ Window Geometry:
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: false
+    collapsed: true
   Width: 1920
   X: 1920
   Y: 0
-  front_camera:
+  front_camera1:
+    collapsed: false
+  top_camera1:
+    collapsed: false
+  front_camera2:
+    collapsed: false
+  top_camera2:
+    collapsed: false
+  front_camera3:
+    collapsed: false
+  top_camera3:
     collapsed: false
