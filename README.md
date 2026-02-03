@@ -15,7 +15,7 @@ Install required packages to run this package:
 ```bash
 python3 -m pip install --user catkin_pkg
 
-sudo apt install -y ros-jazzy-geometry-msgs ros-jazzy-webots-ros2-driver ros-jazzy-controller-manager ros-jazzy-control-msgs ros-jazzy-control-toolbox ros-jazzy-controller-interface ros-jazzy-joint-state-broadcaster ros-jazzy-joint-trajectory-controller ros-jazzy-teleop-twist-keyboard ros-jazzy-rqt-joint-trajectory-controller 
+sudo apt install -y ros-$ROS_DISTRO-geometry-msgs ros-$ROS_DISTRO-webots-ros2-driver ros-$ROS_DISTRO-controller-manager ros-$ROS_DISTRO-control-msgs ros-$ROS_DISTRO-control-toolbox ros-$ROS_DISTRO-controller-interface ros-$ROS_DISTRO-joint-state-broadcaster ros-$ROS_DISTRO-joint-trajectory-controller ros-$ROS_DISTRO-teleop-twist-keyboard ros-$ROS_DISTRO-rqt-joint-trajectory-controller
 ```
 
 To build this package with ROS 2 and colcon:
