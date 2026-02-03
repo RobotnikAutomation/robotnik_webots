@@ -10,6 +10,14 @@ This package provides integration and launch files for simulating Robotnik robot
 - `worlds/`: Webots world files.
 
 ## Usage
+Install required packages to run this package:
+
+```bash
+python3 -m pip install --user catkin_pkg
+
+sudo apt install -y ros-jazzy-geometry-msgs ros-jazzy-webots-ros2-driver ros-jazzy-controller-manager ros-jazzy-control-msgs ros-jazzy-control-toolbox ros-jazzy-controller-interface ros-jazzy-joint-state-broadcaster ros-jazzy-joint-trajectory-controller ros-jazzy-teleop-twist-keyboard ros-jazzy-rqt-joint-trajectory-controller 
+```
+
 To build this package with ROS 2 and colcon:
 
 ```bash
