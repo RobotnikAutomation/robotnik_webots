@@ -26,14 +26,7 @@ def generate_launch_description():
 
     ld = LaunchDescription()
     add_to_launcher = AddArgumentParser(ld)
-    
-    package_dir = get_package_share_directory('robotnik_webots')
-    robot_controller_path = os.path.join(package_dir, 'resource', '/rbwatcher/controller.urdf')
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
-    mode = LaunchConfiguration('mode')
-        
-    
     arg = ExtendedArgument(
         name='robot_id',
         description='Robot personal name',
@@ -46,14 +39,20 @@ def generate_launch_description():
 
     arg = ExtendedArgument(
         name='robot',
-        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit)',
+        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit, rbrobout, rbwatcher)',
         default_value='rbwatcher',
         use_env=True,
         environment='ROBOT',
     )
     add_to_launcher.add_arg(arg)
     robot = LaunchConfiguration('robot')
-    
+
+    package_dir = get_package_share_directory('robotnik_webots')
+    robot_controller_path = os.path.join(package_dir, 'resource', f'/{robot}/controller.urdf')
+
+    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
+    mode = LaunchConfiguration('mode')
+
     arg = ExtendedArgument(
         name='robot_model',
         description='Robot type variation (rbvogui, rbvogui_6w, rbvogui_ackermann)',
@@ -136,10 +135,10 @@ def generate_launch_description():
             TextSubstitution(text='robot_gps_link \\"'), robot_id, TextSubstitution(text='_gps_link\\" '),
             TextSubstitution(text='robot_top_3d_laser_link \\"'), robot_id, TextSubstitution(text='_top_3d_laser_link\\" '),
             TextSubstitution(text='robot_top_3d_laser_base_link \\"'), robot_id, TextSubstitution(text='_top_3d_laser_base_link\\" '),
-            TextSubstitution(text='robot_top_ptz_camera_zoom_color_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_zoom_color_link\\" '),
+            # TextSubstitution(text='robot_top_ptz_camera_zoom_color_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_zoom_color_link\\" '),
             TextSubstitution(text='robot_top_ptz_camera_optical_frame_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_optical_frame_link\\" '),
             TextSubstitution(text='robot_top_ptz_camera_frame_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_frame_link\\" '),
-            TextSubstitution(text='robot_top_ptz_camera_zoom_thermal_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_zoom_thermal_link\\" '),
+            # TextSubstitution(text='robot_top_ptz_camera_zoom_thermal_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_zoom_thermal_link\\" '),
             TextSubstitution(text='robot_top_ptz_camera_optical_thermal_frame_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_optical_thermal_frame_link\\" '),
             TextSubstitution(text='robot_top_ptz_camera_thermal_frame_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_thermal_frame_link\\" '),
             TextSubstitution(text='robot_top_ptz_camera_tilt_link \\"'), robot_id, TextSubstitution(text='_top_ptz_camera_tilt_link\\" '),
@@ -208,6 +207,8 @@ def generate_launch_description():
     )
     '''
         
+    # ros_control_spawners = [diffdrive_controller_spawner, joint_state_broadcaster]
+    
     
     ros2_control_params = [package_dir, '/resource/',robot,'/ros2control.yml']
     

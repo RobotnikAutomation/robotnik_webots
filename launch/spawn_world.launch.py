@@ -46,6 +46,10 @@ def generate_webots_launch_description(context, params):
     webots = WebotsLauncher(
         world=substitute_param_context(params['world_path'], context),
         ros2_supervisor=True,
+        additional_env={
+        '__NV_PRIME_RENDER_OFFLOAD': '1',
+        '__GLX_VENDOR_LIBRARY_NAME': 'nvidia'
+        },
         gui=substitute_param_context(params['gui'], context),
     )
 

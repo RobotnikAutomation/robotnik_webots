@@ -1,6 +1,6 @@
 # robotnik_webots
 
-This package provides integration and launch files for simulating Robotnik robots in the Webots simulator.
+This package provides integration and launch files for simulating Robotnik robots in the Webots simulator (lastly tested webotsR2025a version for ROS2 Jazzy).
 
 ## Structure
 - `launch/`: ROS 2 launch files for spawning robots and worlds in Webots.
@@ -15,7 +15,7 @@ Install required packages to run this package:
 ```bash
 python3 -m pip install --user catkin_pkg
 
-sudo apt install -y ros-$ROS_DISTRO-geometry-msgs ros-$ROS_DISTRO-webots-ros2-driver ros-$ROS_DISTRO-controller-manager ros-$ROS_DISTRO-control-msgs ros-$ROS_DISTRO-control-toolbox ros-$ROS_DISTRO-controller-interface ros-$ROS_DISTRO-joint-state-broadcaster ros-$ROS_DISTRO-joint-trajectory-controller ros-$ROS_DISTRO-teleop-twist-keyboard ros-$ROS_DISTRO-rqt-joint-trajectory-controller
+sudo apt install -y ros-$ROS_DISTRO-geometry-msgs ros-$ROS_DISTRO-webots-ros2 ros-$ROS_DISTRO-webots-ros2-driver ros-$ROS_DISTRO-webots-ros2* ros-$ROS_DISTRO-controller-manager ros-$ROS_DISTRO-control-msgs ros-$ROS_DISTRO-control-toolbox ros-$ROS_DISTRO-controller-interface ros-$ROS_DISTRO-joint-state-broadcaster ros-$ROS_DISTRO-joint-trajectory-controller ros-$ROS_DISTRO-teleop-twist-keyboard ros-$ROS_DISTRO-rqt-joint-trajectory-controller
 ```
 
 To build this package with ROS 2 and colcon:
@@ -87,7 +87,8 @@ ros2 launch robotnik_webots spawn_robot.launch.py run_rviz:=true
 ```
 
 ## Requirements
-- ROS 2 (Humble or later)
+- ROS 2 Humble (Weebots version: 2023)
+- ROS 2 Jazzy (Weebots version: 2025)
 - Webots simulator
 
 ## License
