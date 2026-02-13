@@ -1,0 +1,295 @@
+#VRML_SIM R2023b utf8
+# license: Copyright Cyberbotics Ltd. Licensed for use only with Webots.
+# license url: https://cyberbotics.com/webots_assets_license
+# tags: hidden
+
+
+PROTO ur5e [
+    field SFString shoulder_pan "robot_arm_shoulder_pan_joint"
+    field SFString shoulder_pan_sensor "robot_arm_shoulder_pan_joint_sensor"
+    field SFString shoulder_lift "robot_arm_shoulder_lift_joint"
+    field SFString shoulder_lift_sensor "robot_arm_shoulder_lift_joint_sensor"
+    field SFString elbow "robot_arm_elbow_joint"
+    field SFString elbow_sensor "robot_arm_elbow_joint_sensor"
+    field SFString wrist1 "robot_arm_wrist_1_joint"
+    field SFString wrist1_sensor "robot_arm_wrist_1_joint_sensor"
+    field SFString wrist2 "robot_arm_wrist_2_joint"
+    field SFString wrist2_sensor "robot_arm_wrist_2_joint_sensor"
+    field SFString wrist3 "robot_arm_wrist_3_joint"
+    field SFString wrist3_sensor "robot_arm_wrist_3_joint_sensor"
+]
+{
+    Solid {
+        translation 0.000000 0.000000 0.55
+        children [
+          DEF base_visual CadShape {
+            url "../../resource/rbkairos/meshes/ur5/visual/base.dae"
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor 0.000000 0.000000 0.089159
+            }
+            device [
+              RotationalMotor {
+                name IS shoulder_pan
+                maxVelocity 3.15
+                minPosition -6.2831853
+                maxPosition 6.2831853
+                maxTorque 150.0
+              }
+              PositionSensor {
+                name IS shoulder_pan_sensor
+              }
+            ]
+            endPoint Solid {
+              translation 0.000000 0.000000 0.089159
+              children [
+                DEF shoulder_visual CadShape {
+                  url "../../resource/rbkairos/meshes/ur5/visual/shoulder.dae"
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 1.000000 0.000000
+                    anchor 0.000000 0.135850 0.000000
+                  }
+                  device [
+                    RotationalMotor {
+                      name IS shoulder_lift
+                      maxVelocity 3.15
+                      minPosition -6.2831853
+                      maxPosition 6.2831853
+                      maxTorque 150.0
+                    }
+                    PositionSensor {
+                      name IS shoulder_lift_sensor
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0.000000 0.135850 0.00000
+                    rotation 0.000000 1.000000 0.000000 -0.78
+                    children [
+                      DEF upperarm_visual CadShape {
+                        url "../../resource/rbkairos/meshes/ur5/visual/upperarm.dae"
+                      }
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0.000000 1.000000 0.000000
+                          anchor 0.000000 -0.119700 0.425000
+                        }
+                        device [
+                          RotationalMotor {
+                            name IS elbow
+                            maxVelocity 3.15
+                            minPosition -6.2831853
+                            maxPosition 6.2831853
+                            maxTorque 150.0
+                          }
+                          PositionSensor {
+                            name IS elbow_sensor
+                          }
+                        ]
+                        endPoint Solid {
+                          translation 0.000000 -0.119700 0.425000
+                          rotation 0.000000 1.000000 0.000000 2.355
+                          children [
+                            DEF forearm_visual CadShape {
+                              url "../../resource/rbkairos/meshes/ur5/visual/forearm.dae"
+                            }
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                axis 0.000000 1.000000 0.000000
+                                anchor 0.000000 0.000000 0.392250
+                              }
+                              device [
+                                RotationalMotor {
+                                  name IS wrist1
+                                  maxVelocity 3.2
+                                  minPosition -6.2831853
+                                  maxPosition 6.2831853
+                                  maxTorque 28.0
+                                }
+                                PositionSensor {
+                                  name IS wrist1_sensor
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0.000000 0.000000 0.392250
+                                rotation 0.000000 1.000000 0.000000 1.570796
+                                children [
+                                  DEF wrist1_visual CadShape {
+                                    url "../../resource/rbkairos/meshes/ur5/visual/wrist1.dae"
+                                  }
+                                  HingeJoint {
+                                    jointParameters HingeJointParameters {
+                                      axis 0.000000 0.000000 1.000000
+                                      anchor 0.000000 0.093000 0.000000
+                                    }
+                                    device [
+                                      RotationalMotor {
+                                        name IS wrist2
+                                        maxVelocity 3.2
+                                        minPosition -6.2831853
+                                        maxPosition 6.2831853
+                                        maxTorque 28.0
+                                      }
+                                      PositionSensor {
+                                        name IS wrist2_sensor
+                                      }
+                                    ]
+                                    endPoint Solid {
+                                      translation 0.000000 0.093000 0.000000
+                                      children [
+                                        DEF wrist2_visual CadShape {
+                                          url "../../resource/rbkairos/meshes/ur5/visual/wrist2.dae"
+                                        }
+                                        HingeJoint {
+                                          jointParameters HingeJointParameters {
+                                            axis 0.000000 1.000000 0.000000
+                                            anchor 0.000000 0.000000 0.094650
+                                          }
+                                          device [
+                                            RotationalMotor {
+                                              name IS wrist3
+                                              maxVelocity 3.2
+                                              minPosition -6.2831853
+                                              maxPosition 6.2831853
+                                              maxTorque 28.0
+                                            }
+                                            PositionSensor {
+                                              name IS wrist3_sensor
+                                            }
+                                          ]
+                                          endPoint Solid {
+                                            translation 0.000000 0.000000 0.094650
+                                            children [
+                                              DEF wrist3_visual CadShape {
+                                                url "../../resource/rbkairos/meshes/ur5/visual/wrist3.dae"
+                                              }
+                                              Solid {
+                                                translation 0.000000 0.082300 0.000000
+                                                rotation 0.000000 0.000000 1.000000 1.570796
+                                                name "ee_link"
+                                                boundingObject Pose {
+                                                  translation -0.010000 0.000000 0.000000
+                                                  children [
+                                                    Box {
+                                                       size 0.010000 0.010000 0.010000
+                                                    }
+                                                  ]
+                                                }
+                                                physics Physics {
+                                                }
+                                              }
+                                            ]
+                                            name "wrist_3_link"
+                                            boundingObject DEF wrist3 Mesh {
+                                              url "../../resource/rbkairos/meshes/ur5/collision/wrist3.stl"
+                                            }
+                                            physics Physics {
+                                              density -1
+                                              mass 0.187900
+                                              centerOfMass [ 0.000000 0.000000 0.000000 ]
+                                              inertiaMatrix [
+                                                1.713647e-02 1.713647e-02 3.382200e-02
+                                                0.000000e+00 0.000000e+00 0.000000e+00
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      ]
+                                      name "wrist_2_link"
+                                      boundingObject DEF wrist2 Mesh {
+                                        url "../../resource/rbkairos/meshes/ur5/collision/wrist2.stl"
+                                      }
+                                      physics Physics {
+                                        density -1
+                                        mass 1.219000
+                                        centerOfMass [ 0.000000 0.000000 0.000000 ]
+                                        inertiaMatrix [
+                                          1.111728e-01 1.111728e-01 2.194200e-01
+                                          0.000000e+00 0.000000e+00 0.000000e+00
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                                name "wrist_1_link"
+                                boundingObject DEF wrist1 Mesh {
+                                  url "../../resource/rbkairos/meshes/ur5/collision/wrist1.stl"
+                                }
+                                physics Physics {
+                                  density -1
+                                  mass 1.219000
+                                  centerOfMass [ 0.000000 0.000000 0.000000 ]
+                                  inertiaMatrix [
+                                    1.111728e-01 1.111728e-01 2.194200e-01
+                                    0.000000e+00 0.000000e+00 0.000000e+00
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                          name "forearm_link"
+                          boundingObject DEF forearm Mesh {
+                            url "../../resource/rbkairos/meshes/ur5/collision/forearm.stl"
+                          }
+                          physics Physics {
+                            density -1
+                            mass 2.275000
+                            centerOfMass [ 0.000000 0.000000 0.250000 ]
+                            inertiaMatrix [
+                              4.944331e-02 4.944331e-02 4.095000e-03
+                              0.000000e+00 0.000000e+00 0.000000e+00
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                    name "upper_arm_link"
+                    boundingObject DEF upperarm Mesh {
+                      url "../../resource/rbkairos/meshes/ur5/collision/upperarm.stl"
+                    }
+                    physics Physics {
+                      density -1
+                      mass 8.393000
+                      centerOfMass [ 0.000000 0.000000 0.280000 ]
+                      inertiaMatrix [
+                        2.268907e-01 2.268907e-01 1.510740e-02
+                        0.000000e+00 0.000000e+00 0.000000e+00
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "shoulder_link"
+              boundingObject DEF shoulder Mesh {
+                url "../../resource/rbkairos/meshes/ur5/collision/shoulder.stl"
+              }
+              physics Physics {
+                density -1
+                mass 3.700000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  1.026750e-02 1.026750e-02 6.660000e-03
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
+        ]
+        name "base_link"
+        boundingObject DEF base Mesh {
+          url "../../resource/rbkairos/meshes/ur5/collision/base.stl"
+        }
+        physics Physics {
+          density -1
+          mass 4.000000
+          centerOfMass [ 0.000000 0.000000 0.000000 ]
+          inertiaMatrix [
+            4.433332e-03 4.433332e-03 7.200000e-03
+            0.000000e+00 0.000000e+00 0.000000e+00
+          ]
+        }
+    }
+}
