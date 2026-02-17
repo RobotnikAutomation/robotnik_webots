@@ -86,7 +86,7 @@ PROTO rbkairos [
           jointParameters HingeJointParameters {
             position -2.141492116036656e-16
             axis 0 1 0
-            anchor 0.558 -0.2865 0
+            anchor 0.21528 -0.2690 0.000000
           }
           device [
             RotationalMotor {
@@ -145,7 +145,7 @@ PROTO rbkairos [
           jointParameters HingeJointParameters {
             position 2.554591342287735e-11
             axis 0 1 0
-            anchor 0.558 0.2865 0
+            anchor 0.21528 0.2690 0.000000
           }
           device [
             RotationalMotor {
@@ -195,7 +195,7 @@ endPoint Solid {
           jointParameters HingeJointParameters {
             position 2.5509238640594927e-11
             axis 0 1 0
-            anchor -0.558 0.2865 0
+            anchor -0.21528 0.2690 0.000000
           }
           device [
             RotationalMotor {
@@ -245,7 +245,7 @@ endPoint Solid {
           jointParameters HingeJointParameters {
             position -2.1428697019024251e-16
             axis 0 1 0
-            anchor -0.558 -0.2865 0
+            anchor -0.21528 -0.2690 0.000000
           }
           device [
             RotationalMotor {
