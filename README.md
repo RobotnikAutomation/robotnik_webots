@@ -12,6 +12,7 @@ This package provides integration and launch files for simulating Robotnik robot
 ## Requirements
 - ROS 2 Jazzy or Humble
 - Webots simulator version: R2023b
+- Tested with Python 3.12.3
 
 ## Usage
 Install required packages to run this package:
