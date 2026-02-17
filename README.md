@@ -9,6 +9,10 @@ This package provides integration and launch files for simulating Robotnik robot
 - `robotnik_webots/`: Python package directory (can be used for ROS 2 nodes or utilities).
 - `worlds/`: Webots world files.
 
+## Requirements
+- ROS 2 Jazzy or Humble
+- Webots simulator version: R2023b
+
 ## Usage
 Install required packages to run this package:
 
@@ -32,12 +36,17 @@ colcon build --packages-select robotnik_webots
 ```bash
 ros2 launch robotnik_webots spawn_world.launch.py
 ```
+<!--
 or with the new launch file:
 ```bash
 ros2 launch robotnik_webots new_spawn_world.launch.py
 ```
+-->
 
-#### Arguments for `spawn_world.launch.py` and `new_spawn_world.launch.py`
+#### Arguments for `spawn_world.launch.py` 
+<!--
+and `new_spawn_world.launch.py`
+-->
 
 - `world`: Name of the world file (without extension). Default: `default_world`
 - `world_path`: Full path to the world file. Default: `<package_share>/worlds/<world>.wbt`
@@ -47,12 +56,12 @@ ros2 launch robotnik_webots new_spawn_world.launch.py
 
 Launch a specific world:
 ```bash
-ros2 launch robotnik_webots new_spawn_world.launch.py world:=my_custom_world
+ros2 launch robotnik_webots spawn_world.launch.py world:=my_custom_world
 ```
 
 Launch headless (no GUI):
 ```bash
-ros2 launch robotnik_webots new_spawn_world.launch.py gui:=false
+ros2 launch robotnik_webots spawn_world.launch.py gui:=false
 ```
 
 ### 2. Spawn a robot in Webots
@@ -78,7 +87,7 @@ ros2 launch robotnik_webots spawn_robot.launch.py x:=2.0 y:=1.0 z:=0.0
 
 Spawn a robot with a custom name and model:
 ```bash
-ros2 launch robotnik_webots spawn_robot.launch.py robot_id:=robot_a robot:=rbkairos
+ros2 launch robotnik_webots spawn_robot.launch.py robot:=rbkairos robot_id:=rbkairos1
 ```
 
 Spawn a robot and launch RViz2:
@@ -86,10 +95,13 @@ Spawn a robot and launch RViz2:
 ros2 launch robotnik_webots spawn_robot.launch.py run_rviz:=true
 ```
 
-## Requirements
-- ROS 2 Humble (Weebots version: 2023)
-- ROS 2 Jazzy (Weebots version: 2025)
-- Webots simulator
+Example of cmd_vel command to interact with robot:
+```bash
+ros2 topic pub /rbkairos1/diffdrive_controller/cmd_vel geometry_msgs/msg/TwistStamped "{twist:{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 2.0}}}" -r 500
+```
+
+## Known issues
+ - Webots simulator in versions R2025 seem to have issues with compatibility with current versions of proto files. Therefore we recommend using older version R2023b.
 
 ## License
 See the LICENSE file for details.
