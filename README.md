@@ -2,6 +2,11 @@
 
 This package provides integration and launch files for simulating Robotnik robots in the Webots simulator (lastly tested webotsR2025a version for ROS2 Jazzy).
 
+> **Benchmark scope:** this package is currently used as the Webots backend
+> for evaluation and benchmarking against the other Robotnik simulators.
+> Benchmark profiles may restrict the supported robots, sensors and worlds
+> compared with the general Webots integration.
+
 ## Structure
 - `launch/`: ROS 2 launch files for spawning robots and worlds in Webots.
 - `protos/`: Custom Webots PROTO files for robot models.
