@@ -82,7 +82,14 @@ ros2 launch robotnik_webots spawn_robot.launch.py
 - `robot`: Robot model (e.g., `rbwatcher`, `rbvogui`, `rbkairos`, `rbtheron`, `rbsummit`). Default: `rbwatcher`
 - `robot_model`: Robot type variation. Default: value of `robot`
 - `x`, `y`, `z`: Initial position in the world. Default: `0.0`
+- `yaw`: Initial yaw rotation in radians. Default: `0.0`
 - `run_rviz`: Launch RViz2 (`true`/`false`). Default: `false`
+
+For multiple robots, `scripts/multiple.sh` starts every robot launcher without
+artificial delays, then verifies a camera image plus active controllers from
+all robots against a common startup deadline.  Each individual launcher waits
+for its own Webots spawn response before starting its external controller.  A
+single RViz instance is launched for the scenario when `run_rviz:=true`.
 
 **Examples:**
 

@@ -1,30 +1,31 @@
 import os
-import launch
-from launch_ros.actions import Node
+import xml.etree.ElementTree as ET
+
 from launch import LaunchDescription
-from launch.actions import GroupAction, IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
-from ament_index_python.packages import get_package_share_directory,get_package_prefix
-from webots_ros2_driver.wait_for_controller_connection import WaitForControllerConnection
-from launch.event_handlers import (OnExecutionComplete, OnProcessExit,
-                                OnProcessIO, OnProcessStart, OnShutdown)
-from launch.actions import (DeclareLaunchArgument, EmitEvent, ExecuteProcess,
-                            LogInfo, RegisterEventHandler, TimerAction)
-
-from robotnik_common.launch import ExtendedArgument, AddArgumentParser
-from launch.substitutions import TextSubstitution, PathJoinSubstitution, Command, PythonExpression
-from webots_ros2_driver.utils import controller_protocol, controller_ip_address
+from launch.actions import (
+    EmitEvent,
+    ExecuteProcess,
+    LogInfo,
+    OpaqueFunction,
+    RegisterEventHandler,
+    SetEnvironmentVariable,
+)
 from launch.conditions import IfCondition
+from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
+from launch.substitutions import LaunchConfiguration, TextSubstitution
+from launch_ros.actions import Node
 
+from ament_index_python.packages import get_package_prefix, get_package_share_directory
+from robotnik_common.launch import AddArgumentParser, ExtendedArgument
+from webots_ros2_driver.utils import controller_ip_address, controller_protocol
+from webots_ros2_driver.wait_for_controller_connection import WaitForControllerConnection
 
-def load_urdf(file_path):
-    with open(file_path, 'r') as f:
-        return f.read()
 
 def generate_launch_description():
 
     ld = LaunchDescription()
+    ld.add_action(SetEnvironmentVariable(name='SNAP', value=''))
     add_to_launcher = AddArgumentParser(ld)
 
     arg = ExtendedArgument(
@@ -39,7 +40,7 @@ def generate_launch_description():
 
     arg = ExtendedArgument(
         name='robot',
-        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit, rbrobout, rbwatcher)',
+        description='Robot model (rbkairos, rbrobout, rbwatcher)',
         default_value='rbwatcher',
         use_env=True,
         environment='ROBOT',
@@ -48,21 +49,14 @@ def generate_launch_description():
     robot = LaunchConfiguration('robot')
 
     package_dir = get_package_share_directory('robotnik_webots')
-    robot_controller_path = os.path.join(package_dir, 'resource', f'/{robot}/controller.urdf')
-
-    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
-    mode = LaunchConfiguration('mode')
-
     arg = ExtendedArgument(
         name='robot_model',
-        description='Robot type variation (rbvogui, rbvogui_6w, rbvogui_ackermann)',
+        description='Robot resource variant (currently the same as robot)',
         default_value=robot,
         use_env=True,
         environment='ROBOT_MODEL',
     )
     add_to_launcher.add_arg(arg)
-    robot_model = LaunchConfiguration('robot_model')
-
 
     arg = ExtendedArgument(
         name='x',
@@ -87,6 +81,14 @@ def generate_launch_description():
     )
     add_to_launcher.add_arg(arg)
     z_pos = LaunchConfiguration('z')
+
+    arg = ExtendedArgument(
+        name='yaw',
+        description='yaw rotation in radians',
+        default_value='0.0',
+    )
+    add_to_launcher.add_arg(arg)
+    yaw = LaunchConfiguration('yaw')
     
     arg = ExtendedArgument(
         name='run_rviz',
@@ -98,17 +100,51 @@ def generate_launch_description():
 
     params = add_to_launcher.process_arg()
         
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[{
-            'robot_description': '<robot name=""><link name=""/></robot>',
-        }],
-        namespace=params['robot_id'],
-    )
-    
-    ld.add_action(robot_state_publisher)
+    def create_robot_state_publisher(context):
+        model = params['robot'].perform(context)
+        controller_urdf = os.path.join(
+            package_dir, 'resource', model, 'controller.urdf'
+        )
+        try:
+            with open(controller_urdf, 'r', encoding='utf-8') as urdf_file:
+                initial_description = urdf_file.read()
+        except OSError as error:
+            raise RuntimeError(
+                f"Cannot read controller URDF for model '{model}': {controller_urdf}"
+            ) from error
+
+        # webots_ros2_driver later replaces this with the full Webots-derived
+        # description.  Until then, publish a valid description that already
+        # contains ros2_control and matching ordinary URDF joints.  The former
+        # empty dummy could reach controller manager first and make it abort
+        # nondeterministically under load.
+        try:
+            robot_root = ET.fromstring(initial_description)
+        except ET.ParseError as error:
+            raise RuntimeError(f"Invalid controller URDF: {controller_urdf}") from error
+        ET.SubElement(robot_root, 'link', name='bootstrap_base_link')
+        for control_joint in robot_root.findall('./ros2_control/joint'):
+            joint_name = control_joint.get('name')
+            if not joint_name:
+                continue
+            child_link = f'bootstrap_{joint_name}_link'
+            ET.SubElement(robot_root, 'link', name=child_link)
+            urdf_joint = ET.SubElement(
+                robot_root, 'joint', name=joint_name, type='continuous'
+            )
+            ET.SubElement(urdf_joint, 'parent', link='bootstrap_base_link')
+            ET.SubElement(urdf_joint, 'child', link=child_link)
+            ET.SubElement(urdf_joint, 'axis', xyz='0 0 1')
+        initial_description = ET.tostring(robot_root, encoding='unicode')
+        return [Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            output='screen',
+            parameters=[{'robot_description': initial_description}],
+            namespace=params['robot_id'],
+        )]
+
+    ld.add_action(OpaqueFunction(function=create_robot_state_publisher))
     
     spawn_robot_service_call = ExecuteProcess(
     cmd=[
@@ -147,20 +183,24 @@ def generate_launch_description():
             TextSubstitution(text='translation '), 
             x_pos, TextSubstitution(text=' '), 
             y_pos, TextSubstitution(text=' '), 
-            z_pos, TextSubstitution(text=' }"}')
+            z_pos,
+            TextSubstitution(text=' rotation 0 0 1 '),
+            yaw,
+            TextSubstitution(text=' }"}')
         ]
     ],
     output='screen'
     )
-    ld.add_action(spawn_robot_service_call)
-
-
-    
     footprint_publisher = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
         output='screen',
-        arguments=['0', '0', '-0.117500', '0', '0', '0', [robot_id, '_base_link'], [robot_id, '_base_footprint']],
+        arguments=[
+            '--x', '0', '--y', '0', '--z', '-0.117500',
+            '--yaw', '0', '--pitch', '0', '--roll', '0',
+            '--frame-id', [robot_id, '_base_link'],
+            '--child-frame-id', [robot_id, '_base_footprint'],
+        ],
         namespace=params['robot_id'],
     )
     ld.add_action(footprint_publisher)
@@ -170,7 +210,11 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         output='screen',
-        arguments=[x_pos, y_pos, z_pos, '0', '0', '0', 'world', [robot_id,'_odom']],
+        arguments=[
+            '--x', x_pos, '--y', y_pos, '--z', z_pos,
+            '--yaw', yaw, '--pitch', '0', '--roll', '0',
+            '--frame-id', 'world', '--child-frame-id', [robot_id, '_odom'],
+        ],
         namespace=params['robot_id'],
     )
     ld.add_action(worldtf_publisher)
@@ -196,39 +240,18 @@ def generate_launch_description():
         namespace=params['robot_id'],
     )
     
-    ''' 
-    robotnik_controller= Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['robotnik_base_controller'] + controller_manager_timeout,
-        prefix=controller_manager_prefix,
-        output='screen',
-        emulate_tty=True,
-    )
-    '''
-        
-    # ros_control_spawners = [diffdrive_controller_spawner, joint_state_broadcaster]
-    
-    
     ros2_control_params = [package_dir, '/resource/',robot,'/ros2control.yml']
-    
-   
-    
     node_name = ['webots_controller_',robot_id]
     webots_controller = (os.path.join(get_package_share_directory('webots_ros2_driver'), 'scripts', 'webots-controller'))
     protocol = controller_protocol()
     ip_address = controller_ip_address() if (protocol == 'tcp') else ''
     ip_address_option = [] if not ip_address else ['--ip-address=' + ip_address]
     port = '1234'
-    
-
-    
     ros_arguments = [
     f"-r", ["__ns:=/",robot_id],
     f"-p", ["robot_description:=",package_dir,'/resource/',robot,'/','controller.urdf'],
     f"-p", "use_sim_time:=True",
-    f"-p", "set_robot_state_publisher:=True",
-    f"-p", "update_rate:=100"]
+    f"-p", "set_robot_state_publisher:=True"]
     
     
     robot_driver = ExecuteProcess(
@@ -246,11 +269,15 @@ def generate_launch_description():
     ],
     output='screen',
     name=node_name,
-    respawn=True,
+    # A reconnect would retrigger WaitForControllerConnection with the same
+    # controller-spawner action, which ROS launch cannot execute twice.
+    respawn=False,
     # Set WEBOTS_HOME to package directory to load correct controller library
-    additional_env={'WEBOTS_HOME': get_package_prefix('webots_ros2_driver')},
+    additional_env={
+        'WEBOTS_HOME': get_package_prefix('webots_ros2_driver'),
+        'SNAP': '',
+    },
     )
-    ld.add_action(robot_driver)
     
     waiting_node = WaitForControllerConnection(
         target_driver=robot_driver,
@@ -258,28 +285,87 @@ def generate_launch_description():
     )
     ld.add_action(waiting_node)
     
-    init_diffdrive_controller = RegisterEventHandler(
-        OnProcessExit(
-            target_action=joint_state_broadcaster,
-            on_exit=[
-                LogInfo(msg='Joint States spawned'),
-                diffdrive_controller_spawner
+    def start_driver_after_spawn(event, _context):
+        if event.returncode != 0:
+            return [
+                LogInfo(msg='ERROR: robot spawn service call failed'),
+                EmitEvent(event=Shutdown(reason='Robot spawn failed')),
             ]
-        )
-    )
-    ld.add_action(init_diffdrive_controller)
+        return [LogInfo(msg='Robot spawned; starting Webots driver'), robot_driver]
+
+    def start_diffdrive_after_joint_states(event, _context):
+        if event.returncode != 0:
+            return [
+                LogInfo(msg='ERROR: joint state broadcaster failed'),
+                EmitEvent(event=Shutdown(reason='Controller startup failed')),
+            ]
+        return [LogInfo(msg='Joint state broadcaster active'), diffdrive_controller_spawner]
+
+    def shutdown_after_driver_exit(event, _context):
+        level = 'ERROR' if event.returncode != 0 else 'INFO'
+        return [
+            LogInfo(msg=f'{level}: Webots driver exited with status {event.returncode}'),
+            EmitEvent(event=Shutdown(reason='Webots driver exited')),
+        ]
+
+    def shutdown_after_rviz_exit(event, _context):
+        level = 'ERROR' if event.returncode != 0 else 'INFO'
+        return [
+            LogInfo(msg=f'{level}: RViz exited with status {event.returncode}'),
+            EmitEvent(event=Shutdown(reason='RViz exited')),
+        ]
+
+    # Register every handler before starting the service call so quick process
+    # exits cannot be missed.  In particular, the driver must not start until
+    # the supervisor has finished inserting this robot into the world.
+    ld.add_action(RegisterEventHandler(OnProcessExit(
+        target_action=spawn_robot_service_call,
+        on_exit=start_driver_after_spawn,
+    )))
+    ld.add_action(RegisterEventHandler(OnProcessExit(
+        target_action=joint_state_broadcaster,
+        on_exit=start_diffdrive_after_joint_states,
+    )))
+    ld.add_action(RegisterEventHandler(OnProcessExit(
+        target_action=robot_driver,
+        on_exit=shutdown_after_driver_exit,
+    )))
+    ld.add_action(spawn_robot_service_call)
     
     rviz2_config = [get_package_share_directory('robotnik_webots'),'/resource/', robot,'/rviz_config.rviz']
-    
-   
+
+    rviz_environment = {'SNAP': ''}
+    if os.environ.get('SNAP_NAME') and os.environ.get('SNAP_NAME') != 'webots':
+        # Graphical processes started from a snap-packaged IDE otherwise load
+        # that snap's GTK/GIO modules and can fail against the host glibc.
+        for variable in (
+            'GDK_PIXBUF_MODULEDIR',
+            'GDK_PIXBUF_MODULE_FILE',
+            'GIO_MODULE_DIR',
+            'GSETTINGS_SCHEMA_DIR',
+            'GTK_EXE_PREFIX',
+            'GTK_IM_MODULE_FILE',
+            'GTK_PATH',
+            'LOCPATH',
+        ):
+            rviz_environment[variable] = ''
+        original_xdg_data_dirs = os.environ.get('XDG_DATA_DIRS_VSCODE_SNAP_ORIG')
+        if original_xdg_data_dirs:
+            rviz_environment['XDG_DATA_DIRS'] = original_xdg_data_dirs
+
     rviz2 = Node(
         package="rviz2",
         executable="rviz2",
         namespace=params['robot_id'],
         arguments=['-d', rviz2_config],
-        condition=IfCondition(run_rviz)
+        condition=IfCondition(run_rviz),
+        additional_env=rviz_environment,
     )
 
+    ld.add_action(RegisterEventHandler(OnProcessExit(
+        target_action=rviz2,
+        on_exit=shutdown_after_rviz_exit,
+    )))
     ld.add_action(rviz2)
 
     return ld
