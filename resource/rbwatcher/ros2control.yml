@@ -17,19 +17,30 @@
       wheel_separation: 0.452
       wheel_radius: 0.11
 
-      # The real separation between wheels is not resulting in a perfect odometry
-      wheel_separation_multiplier: 1.112
+      # The simulated separation between wheels is not resulting in a perfect odometry
+
+      wheel_separation_multiplier: 3.59
 
       use_stamped_vel: false
       base_frame_id: "robot_base_link"
       odom_frame_id: "robot_odom"
       tf_frame_prefix_enable: false
 
+      pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+      twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+
       linear:
         x:
-          max_velocity: 0.2 # Maximal speed of turtlebot
+          has_velocity_limits: true
+          max_velocity: 0.2
+          has_acceleration_limits: true
+          max_acceleration: 1.0
+      angular:
         z:
-          max_velocity: 0.2 # Maximal speed of turtlebot
+          has_velocity_limits: true
+          max_velocity: 0.2
+          has_acceleration_limits: true
+          max_acceleration: 1.0
 
   joint_state_broadcaster:
     ros__parameters:
