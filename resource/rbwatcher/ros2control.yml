@@ -19,7 +19,7 @@
 
       # The simulated separation between wheels is not resulting in a perfect odometry
 
-      wheel_separation_multiplier: 3.59
+      wheel_separation_multiplier: 3.56
 
       use_stamped_vel: false
       base_frame_id: "robot_base_link"
