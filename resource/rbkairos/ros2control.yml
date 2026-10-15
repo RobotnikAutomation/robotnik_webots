@@ -14,20 +14,27 @@
       left_wheel_names: ["robot_front_left_wheel_joint", "robot_back_left_wheel_joint"]
       right_wheel_names: ["robot_front_right_wheel_joint", "robot_back_right_wheel_joint"]
 
-      wheel_separation: 0.573
+      wheel_separation: 0.538
       wheel_radius: 0.127
 
-      # The real separation between wheels is not resulting in a perfect odometry
-      wheel_separation_multiplier: 1.112
+      # The simulated separation between wheels is not resulting in a perfect odometry
+      wheel_separation_multiplier: 1.515
 
       use_stamped_vel: false
       base_frame_id: "base_link"
     
       linear:
         x:
-          max_velocity: 0.2 # Maximal speed of turtlebot
+          has_velocity_limits: true
+          max_velocity: 0.2
+          has_acceleration_limits: true
+          max_acceleration: 1.0
+      angular:
         z:
-          max_velocity: 0.2 # Maximal speed of turtlebot
+          has_velocity_limits: true
+          max_velocity: 0.2
+          has_acceleration_limits: true
+          max_acceleration: 1.0
 
   joint_state_broadcaster:
     ros__parameters:
