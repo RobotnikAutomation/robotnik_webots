@@ -1,6 +1,41 @@
 <?xml version="1.0" ?>
 <robot name="rbwatcher">
     <webots>
+        <device reference="front_rgbd_camera_color" type="Camera">
+          <ros>
+            <enabled>true</enabled>
+            <updateRate>25</updateRate>
+            <alwaysOn>true</alwaysOn>
+            <imageSuffix>/image_color</imageSuffix>
+          </ros>
+        </device>
+        <device reference="top_ptz_camera" type="Camera">
+          <ros>
+            <enabled>true</enabled>
+            <updateRate>25</updateRate>
+            <alwaysOn>true</alwaysOn>
+            <imageSuffix>/image_color</imageSuffix>
+          </ros>
+        </device>
+        <device reference="top_ptz_camera_depth" type="RangeFinder">
+          <ros>
+            <enabled>true</enabled>
+            <updateRate>25</updateRate>
+            <alwaysOn>true</alwaysOn>
+            <imageSuffix>/image</imageSuffix>
+          </ros>
+        </device>
+        <plugin type="webots_ros2_driver::Ros2IMU">
+          <enabled>true</enabled>
+          <!-- Canonical IMU request; the 20 ms world step keeps physics at 50 Hz. -->
+          <updateRate>100</updateRate>
+          <topicName>imu/data</topicName>
+          <alwaysOn>true</alwaysOn>
+          <frameName>imu_link</frameName>
+          <inertialUnitName>robot_imu_inertial</inertialUnitName>
+          <gyroName>robot_imu_gyro</gyroName>
+          <accelerometerName>robot_imu_accelerometer</accelerometerName>
+        </plugin>
         <plugin type="webots_ros2_control::Ros2Control">
             <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher</robot_param_node>

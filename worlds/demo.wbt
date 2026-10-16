@@ -12,8 +12,16 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 
 WorldInfo {
   title "Robotnik Test World"
-  basicTimeStep 20 # ms
+  basicTimeStep 20 # ms; canonical 50 Hz physics step
   FPS 30
+  contactProperties [
+    ContactProperties {
+      material1 "rubber"
+      coulombFriction 0.7
+      bounce 0.0
+      forceDependentSlip 0.05
+    }
+  ]
 }
 Viewpoint {
   orientation -0.1454525098168424 -0.08250904869804526 0.9859187716393907 3.9103647187611212
@@ -68,11 +76,4 @@ SolidBox {
     roughness 0.5
     metalness 0
   }
-}
-
-ContactProperties {
-  material1 "rubber"
-  coulombFriction 0.7
-  bounce 0.0               # No bounce for wheels
-  forceDependentSlip 0.05 
 }

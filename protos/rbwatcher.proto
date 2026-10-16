@@ -306,6 +306,13 @@ PROTO rbwatcher [
                     }
                 ]
                 name IS robot_imu_link
+                boundingObject Box {
+                  size 0.001 0.001 0.001
+                }
+                physics Physics {
+                  density -1
+                  mass 0.01
+                }
                 }
             ]
             name IS robot_imu_base_link            
@@ -314,26 +321,6 @@ PROTO rbwatcher [
             translation 0.308810 0.020000 0.152430
             children [
                 
-                DEF FRONT_RGBD_CAMERA_DEPTH Solid {
-                  children [
-                      Pose {
-                      translation 0.01 0 0
-                      rotation 0 0 0 0
-                      children [
-                          RangeFinder {
-                          name "front_rgbd_camera_depth"
-                          fieldOfView 1.487021
-                          width 1280
-                          height 720
-                          noise 0.007000
-                          near 0.100000
-                          minRange 0.100000
-                          }
-                      ]
-                      }
-                  ]
-                  name IS robot_front_rgbd_camera_depth_frame
-                }
                 DEF FRONT_RGBD_CAMERA_INFRARED Solid {
                   translation 0.000000 -0.050000 0.000000
                   children [
@@ -344,8 +331,8 @@ PROTO rbwatcher [
                           Camera {
                             name "front_rgbd_camera_irred1"
                             fieldOfView 1.487021
-                            width 1280
-                            height 720
+                            width 640
+                            height 480
                             noise 0.050000
                           }
                       ]
@@ -357,8 +344,8 @@ PROTO rbwatcher [
                           Camera {
                             name "front_rgbd_camera_irred2"
                             fieldOfView 1.487021
-                            width 1280
-                            height 720
+                            width 640
+                            height 480
                             noise 0.050000
                           }
                       ]
@@ -540,8 +527,16 @@ PROTO rbwatcher [
                                   Camera {
                                     name "top_ptz_camera"
                                     fieldOfView 1.1118
-                                    width 1920
-                                    height 1080
+                                    width 1280
+                                    height 720
+                                  }
+                                  RangeFinder {
+                                    name "top_ptz_camera_depth"
+                                    fieldOfView 1.1118
+                                    width 1280
+                                    height 720
+                                    minRange 0.1
+                                    maxRange 100
                                   }
                                 ]
                                 }
